@@ -1,0 +1,15 @@
+.container{
+    background: #35B6FF;
+    height: 100%;
+    position: fixed;
+    width: 300px;
+}
+
+.logo{
+    margin: 20px auto 40px;
+    display: block;
+}
+
+.divider{
+    border-top: 3px solid #FFF
+}
