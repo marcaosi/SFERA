@@ -1,4 +1,5 @@
 .container{
     position: relative;
-    left: 300px;
+    padding-left: 300px;
+    padding-right: 0;
 }

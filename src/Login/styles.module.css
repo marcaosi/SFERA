@@ -1,0 +1,17 @@
+.form{
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid #003C5F;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.title{
+    font-size: 18px;
+    margin: 50px 0;
+    color: #003C5F;
+}
