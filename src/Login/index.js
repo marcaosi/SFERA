@@ -1,13 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import axios from '../Service/Axios'
 
 import logo from '../assets/SFERA_AZUL.png'
-
 import styles from './styles.module.css'
 
 export default function Login(){
+    const [dados, setDados] = useState({
+        matricula: '',
+        senha: ''
+    })
+
+    const [error, setError] = useState(false)
+
+    const handleChangeText = (event) => {
+        setDados({
+            ...dados,
+            [event.target.name] : event.target.value
+        })
+    }
+
+    const handleSubmitForm = async (event) => {
+        event.preventDefault()
+
+        try{
+            const { data } = await axios.post("login", dados)
+        
+            localStorage.setItem("jwt", JSON.stringify(data))
+        }catch(err){
+            console.log(err)
+            setError("Dados incorretos.")
+        }
+    }
+
     return (
         <>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleSubmitForm}>
                 <div className="row">
                     <div className="col text-center">
                         <img src={logo} className={styles.logo} alt="SFERA" />
@@ -21,18 +49,35 @@ export default function Login(){
 
                 <div className="row">
                     <div className="col">
+                        {
+                            error ? (
+                                <div className="alert alert-danger" role="alert">
+                                    {error}
+                                </div>
+                            ) : null
+                        }
                         <div className="form-group">
                             <label>Usuário</label>
-                            <input type="text" className="form-control" />
+                            <input type="text" className="form-control" 
+                                name="matricula"
+                                value={dados.matricula}
+                                onChange={handleChangeText}
+                                required
+                            />
                         </div>
 
                         <div className="form-group">
                             <label>Senha</label>
-                            <input type="text" className="form-control" />
+                            <input type="password" className="form-control" 
+                                name="senha"
+                                value={dados.senha} 
+                                onChange={handleChangeText}
+                                required
+                            />
                         </div>
 
                         <div className="form-group text-center">
-                            <button type="button" className="btn btn-info">Acessar</button>
+                            <button type="submit" className="btn btn-info">Acessar</button>
                         </div>
                     </div>
                 </div>
