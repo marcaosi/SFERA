@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 
 import Title from '../Components/Title'
 import axios from '../Service/Axios'
+import swal from 'sweetalert'
 
 import styles from './styles.module.css'
-import swal from 'sweetalert'
 
 export default function NovoColaborador(){
     const [data, setData] = useState({
