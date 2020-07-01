@@ -14,6 +14,7 @@ import NovoColaborador from './NovoColaborador'
 import Login from './Login'
 import PrivateRoute from './Components/PrivateRoute'
 import NovoAluno from './NovoAluno'
+import ListarSalas from './NovaSala/ListarSalas'
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
                     </PrivateRoute>
                     <PrivateRoute path="/sala/novo" exact>
                       <NovaSala />
+                    </PrivateRoute>
+                    <PrivateRoute path="/sala" exact>
+                      <ListarSalas />
                     </PrivateRoute>
                     <PrivateRoute path="/colaborador/novo" exact>
                       <NovoColaborador />
