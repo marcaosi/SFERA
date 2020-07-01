@@ -46,7 +46,7 @@ export default function NovoColaborador(){
 
                         <div className="form-group">
                             <label>Descrição</label>
-                            <textarea className="form-control" name="descricao" onChange={handleChangeText} placeholder="Berçário I">{data.descricao}</textarea>
+                            <textarea className="form-control" name="descricao" onChange={handleChangeText} placeholder="Berçário I" value={data.descricao}></textarea>
                         </div>
 
                         <div className="form-group text-center">
