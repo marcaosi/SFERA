@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from '../Service/Axios'
 import Title from '../Components/Title'
 import { Link } from 'react-router-dom'
+import { FaTrash, FaPencilAlt } from 'react-icons/fa'
+import swal from 'sweetalert'
 
 export default function ListarSalas(){
     const [salas, setSalas] = useState([])
@@ -41,7 +43,22 @@ export default function ListarSalas(){
                                         <td>{sala.id}</td>
                                         <td>{sala.ano}</td>
                                         <td>{sala.descricao}</td>
-                                        <td></td>
+                                        <td>
+                                            <button className="btn btn-danger btn-sm" onClick={
+                                                () => {
+                                                    axios
+                                                    .delete(`sala/${sala.id}`)
+                                                    .then(() => {
+                                                        const newSalas = salas.filter(sal => sal.id !== sala.id)
+                                                        setSalas(newSalas)
+                                                    })
+                                                    .catch(() => swal("Falha ao excluir"))
+                                            }}><FaTrash /></button>
+
+                                            <Link to={`sala/${sala.id}/editar`} 
+                                                className="btn btn-warning btn-sm ml-2"
+                                            ><FaPencilAlt /></Link>
+                                        </td>
                                     </tr>
                                 ))
                             }
