@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 import Title from '../Components/Title'
 import axios from '../Service/Axios'
@@ -7,6 +8,19 @@ import swal from 'sweetalert'
 import styles from './styles.module.css'
 
 export default function NovoAluno(){
+
+    const { id } = useParams()
+
+    useEffect(() => {
+        if(id){
+            axios.get(`aluno/${id}`)
+                .then(({data}) => setData({
+                    ...data,
+                    ...(data.data)[0]
+                }))
+                .catch((err) => swal("Falha ao carregar dados. Recarregue a página."))
+        }
+    }, [id])
 
     const [data, setData] = useState({
         nome: "",
@@ -32,14 +46,25 @@ export default function NovoAluno(){
         console.log(date)
         aluno.nascimento = `${date[2]}/${date[1]}/${date[0]}`
 
-        axios
-            .post("aluno", aluno)
-            .then(data => {
-                swal("Dados salvos com sucesso.")
-            })
-            .catch(err => {
-                swal("Falha ao salvar, verifique os dados e tente novamente.")
-            })
+        if(id){
+            axios
+                .put(`aluno/${id}`, aluno)
+                .then(data => {
+                    swal("Dados salvos com sucesso.")
+                })
+                .catch(err => {
+                    swal("Falha ao salvar, verifique os dados e tente novamente.")
+                })
+        }else{
+            axios
+                .post("aluno", aluno)
+                .then(data => {
+                    swal("Dados salvos com sucesso.")
+                })
+                .catch(err => {
+                    swal("Falha ao salvar, verifique os dados e tente novamente.")
+                })
+        }
     }
 
     return (

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 import Title from '../Components/Title'
 import axios from '../Service/Axios'
@@ -8,6 +9,19 @@ import RandomString from '../Utils/RandomString'
 import styles from './styles.module.css'
 
 export default function NovoColaborador(){
+
+    const { id } = useParams()
+
+    useEffect(() => {
+        if(id){
+            axios.get(`colaborador/${id}`)
+                .then(({data}) => setData({
+                    ...data,
+                    ...(data.data)[0]
+                }))
+                .catch((err) => swal("Falha ao carregar dados. Recarregue a página."))
+        }
+    }, [id])
 
     const [data, setData] = useState({
         nome: "",
@@ -34,14 +48,25 @@ export default function NovoColaborador(){
         console.log(date)
         colaborador.nascimento = `${date[2]}/${date[1]}/${date[0]}`
 
-        axios
-            .post("colaborador", colaborador)
-            .then(data => {
-                swal("Dados salvos com sucesso.")
-            })
-            .catch(err => {
-                swal("Falha ao salvar, verifique os dados e tente novamente.")
-            })
+        if(id){
+            axios
+                .put(`colaborador/${id}`, colaborador)
+                .then(data => {
+                    swal("Dados salvos com sucesso.")
+                })
+                .catch(err => {
+                    swal("Falha ao salvar, verifique os dados e tente novamente.")
+                })
+        }else{
+            axios
+                .post("colaborador", colaborador)
+                .then(data => {
+                    swal("Dados salvos com sucesso.")
+                })
+                .catch(err => {
+                    swal("Falha ao salvar, verifique os dados e tente novamente.")
+                })
+        }
     }
 
     return (

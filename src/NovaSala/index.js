@@ -1,12 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Title from '../Components/Title'
 import axios from '../Service/Axios'
 import swal from 'sweetalert'
 
 import styles from './styles.module.css'
+import { useParams } from 'react-router-dom'
 
 export default function NovoColaborador(){
+
+    const { id } = useParams()
+
+    useEffect(() => {
+        if(id){
+            axios.get(`sala/${id}`)
+                .then(({data}) => setData({
+                    ...data,
+                    ...(data.data)[0]
+                }))
+                .catch((err) => swal("Falha ao carregar dados. Recarregue a página."))
+        }
+    }, [id])
 
     const [data, setData] = useState({
         ano: new Date().getFullYear(),
@@ -23,14 +37,26 @@ export default function NovoColaborador(){
     const handleSubmitForm = (event) => {
         event.preventDefault()
 
-        axios
-            .post("sala", data)
-            .then(data => {
-                swal("Dados salvos com sucesso.")
-            })
-            .catch(err => {
-                swal("Falha ao salvar, verifique os dados e tente novamente.")
-            })
+        if(id){
+            axios
+                .put(`sala/${id}`, data)
+                .then(data => {
+                    swal("Dados salvos com sucesso.")
+                })
+                .catch(err => {
+                    swal("Falha ao salvar, verifique os dados e tente novamente.")
+                })
+        }else{
+            axios
+                .post("sala", data)
+                .then(data => {
+                    swal("Dados salvos com sucesso.")
+                })
+                .catch(err => {
+                    swal("Falha ao salvar, verifique os dados e tente novamente.")
+                })
+        }
+
     }
     return (
         <>
