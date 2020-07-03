@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import axios from '../Service/Axios'
 
@@ -14,6 +14,11 @@ export default function Login(){
 
     const [error, setError] = useState(false)
     const history = useHistory()
+
+    useEffect(() => {
+        const jwt = localStorage.getItem("jwt")
+        if(jwt) history.push("/")
+    }, [])
 
     const handleChangeText = (event) => {
         setDados({
