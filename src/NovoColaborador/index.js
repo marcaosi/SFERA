@@ -14,7 +14,7 @@ export default function NovoColaborador(){
 
     useEffect(() => {
         if(id){
-            axios.get(`colaborador/${id}`)
+            axios.get(`colaborador`)
                 .then(({data}) => setData({
                     ...data,
                     ...(data.data)[0]

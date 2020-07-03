@@ -37,9 +37,12 @@ export default function NovoColaborador(){
     const handleSubmitForm = (event) => {
         event.preventDefault()
 
+        const dados = data
+        dados.ano = Number(dados.ano)
+
         if(id){
             axios
-                .put(`sala/${id}`, data)
+                .put(`sala`, data)
                 .then(data => {
                     swal("Dados salvos com sucesso.")
                 })

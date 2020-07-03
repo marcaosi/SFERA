@@ -38,7 +38,7 @@ export default function NovoSetor(){
 
         if(id){
             axios
-                .put(`setor/${id}`, data)
+                .put(`setor`, data)
                 .then(data => {
                     swal("Dados salvos com sucesso.")
                 })

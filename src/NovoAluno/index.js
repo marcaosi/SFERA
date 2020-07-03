@@ -48,7 +48,7 @@ export default function NovoAluno(){
 
         if(id){
             axios
-                .put(`aluno/${id}`, aluno)
+                .put(`aluno`, aluno)
                 .then(data => {
                     swal("Dados salvos com sucesso.")
                 })
