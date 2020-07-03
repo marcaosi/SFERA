@@ -4,6 +4,7 @@ import axios from '../Service/Axios'
 
 import logo from '../assets/SFERA_AZUL.png'
 import styles from './styles.module.css'
+import { useHistory } from 'react-router-dom'
 
 export default function Login(){
     const [dados, setDados] = useState({
@@ -12,6 +13,7 @@ export default function Login(){
     })
 
     const [error, setError] = useState(false)
+    const history = useHistory()
 
     const handleChangeText = (event) => {
         setDados({
@@ -27,6 +29,7 @@ export default function Login(){
             const { data } = await axios.post("login", dados)
         
             localStorage.setItem("jwt", JSON.stringify(data))
+            history.push("/")
         }catch(err){
             console.log(err)
             setError("Dados incorretos.")
