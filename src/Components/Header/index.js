@@ -9,7 +9,7 @@ export default function Header(){
         <header className={styles.header + " row"}>
             <div className="col">
                 <span>
-                    Olá, Usuário!
+                    Olá, Seja Bem-vindo!
                 </span>
             </div>
             <div className="col text-right">
