@@ -26,7 +26,7 @@ function App() {
         <Route path="/login" exact>
           <Login />
         </Route>
-        <Route path="/">
+        <PrivateRoute path="/">
           <Sidebar />
           <div className={styles.container + " container-fluid"}>
               <div className="row">
@@ -71,7 +71,7 @@ function App() {
                 </Content>
               </div>
           </div>
-        </Route>
+        </PrivateRoute>
       </Switch>
     </BrowserRouter>
   )
