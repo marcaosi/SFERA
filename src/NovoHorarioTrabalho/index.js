@@ -6,7 +6,6 @@ import axios from '../Service/Axios'
 import swal from 'sweetalert'
 
 import styles from './styles.module.css'
-import { ModalHeader, Modal, ModalBody, ModalFooter } from 'reactstrap'
 
 export default function NovoHorarioTrabalho(){
 
@@ -24,8 +23,10 @@ export default function NovoHorarioTrabalho(){
     }, [id])
 
     const [data, setData] = useState({
-        entrada1: 0,
-        saida1: 0
+        entrada1: "",
+        saida1: "",
+        entrada2: "",
+        saida2: ""
     })
 
     const handleChangeText = (event) => {
@@ -40,7 +41,7 @@ export default function NovoHorarioTrabalho(){
 
         if(id){
             axios
-                .put(`horarioTrabalho/${id}`, data)
+                .put(`horarioTrabalho`, data)
                 .then(data => {
                     swal("Dados salvos com sucesso.")
                 })
@@ -59,66 +60,60 @@ export default function NovoHorarioTrabalho(){
         }
     }
 
-    const [modalStudentOpen, setModalStudentOpen] = useState(false)
-    const [modalClassOpen, setModalClassOpen] = useState(false)
-
-    const handleConsultClass = () => {
-        setModalClassOpen(!modalClassOpen)
-    }
-
-    const handleConsultStudent = () => {
-        setModalStudentOpen(!modalStudentOpen)
-    }
-
     return (
         <>
-            <Title>Adicionar nova agenda</Title>
-
-            <Modal isOpen={modalStudentOpen}>
-                <ModalHeader toggle={handleConsultStudent}>Consultar Alunos</ModalHeader>
-                <ModalBody>
-                    
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-danger" onClick={handleConsultStudent}>Fechar</button>
-                </ModalFooter>
-            </Modal>
-
-            <Modal isOpen={modalClassOpen}>
-                <ModalHeader toggle={handleConsultClass}>Consultar Salas</ModalHeader>
-                <ModalBody>
-                    
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-danger" onClick={handleConsultClass}>Fechar</button>
-                </ModalFooter>
-            </Modal>
+            <Title>Adicionar novo Horário de trabalho</Title>
 
             <div className="row">
                 <div className="col">
                     <form className={ styles.form } onSubmit={handleSubmitForm}>
-                        <div className="form-group form-inline">
-                            <label>Aluno: &nbsp;</label>
-                            <input 
-                                type="text" 
-                                className="form-control"
-                                name="id_aluno"
-                                value={data.id_aluno}
-                                onChange={handleChangeText}
-                            />&nbsp;
-                            <button type="button" className="btn btn-warning btn-sm" onClick={handleConsultStudent}>Consultar</button>
+                        <p className="text-muted">Informe os horários no formato HH:mm</p>
+                        <div className="row">
+                            <div className="form-group col-6 form-inline">
+                                <label className="col-4">Entrada 1:</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control col-8"
+                                    name="entrada1"
+                                    value={data.entrada1}
+                                    onChange={handleChangeText}
+                                />
+                            </div>
+
+                            <div className="form-group col-6 form-inline">
+                                <label className="col-4">Saída 1:</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control col-8"
+                                    name="saida1"
+                                    value={data.saida1}
+                                    onChange={handleChangeText}
+                                />
+                            </div>
                         </div>
 
-                        <div className="form-group form-inline">
-                            <label>Sala: &nbsp;</label>
-                            <input 
-                                type="text" 
-                                className="form-control"
-                                name="id_sala"
-                                value={data.id_sala}
-                                onChange={handleChangeText}
-                            />&nbsp;
-                            <button type="button" className="btn btn-warning btn-sm" onClick={handleConsultClass}>Consultar</button>
+                        <div className="row">
+                            <div className="form-group col-6 form-inline">
+                                <label className="col-4">Entrada 2:</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control col-8"
+                                    name="entrada2"
+                                    value={data.entrada2}
+                                    onChange={handleChangeText}
+                                />
+                            </div>
+
+                            <div className="form-group col-6 form-inline">
+                                <label className="col-4">Saída 2:</label>
+                                <input 
+                                    type="text" 
+                                    className="form-control col-8"
+                                    name="saida2"
+                                    value={data.saida2}
+                                    onChange={handleChangeText}
+                                />
+                            </div>
                         </div>
 
                         <div className="form-group text-center">

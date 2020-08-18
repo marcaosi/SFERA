@@ -5,23 +5,23 @@ import { Link } from 'react-router-dom'
 import swal from 'sweetalert'
 import { FaTrash, FaPencilAlt } from 'react-icons/fa'
 
-export default function ListarColaboradores(){
-    const [colaboradores, setColaboradores] = useState([])
+export default function ListarHorarioTrabalho(){
+    const [horarios, setHorarios] = useState([])
 
     useEffect(() => {
         axios
-            .get("colaborador")
-            .then(({data}) => setColaboradores(data.data))
+            .get("horarioTrabalho")
+            .then(({data}) => setHorarios(data.data))
             .catch(err => console.log(err))
     }, [])
 
     return(
         <>
-            <Title>Gerenciar colaboradores cadastrados</Title>
+            <Title>Gerenciar horários de trabalho cadastrados</Title>
 
             <div className="row justify-content-md-center">
                 <div className="col-10 text-right">
-                    <Link to="colaborador/novo" className="btn btn-primary mb-4">Novo colaborador</Link>
+                    <Link to="horarioTrabalho/novo" className="btn btn-primary mb-4">Novo Horário de Trabalho</Link>
                 </div>
             </div>
 
@@ -31,31 +31,35 @@ export default function ListarColaboradores(){
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nome</th>
-                                <th>Matrícula</th>
+                                <th>Entrada 1</th>
+                                <th>Saída 1</th>
+                                <th>Entrada 2</th>
+                                <th>Saída 2</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                colaboradores.map(colaborador => (
-                                    <tr key={colaborador.id}>
-                                        <td>{colaborador.id}</td>
-                                        <td>{colaborador.nome}</td>
-                                        <td>{colaborador.matricula}</td>
+                                horarios.map(horario => (
+                                    <tr key={horario.id}>
+                                        <td>{horario.id}</td>
+                                        <td>{horario.entrada1}</td>
+                                        <td>{horario.saida1}</td>
+                                        <td>{horario.entrada2}</td>
+                                        <td>{horario.saida2}</td>
                                         <td>
                                             <button className="btn btn-danger btn-sm" onClick={
                                                 () => {
                                                     axios
-                                                    .delete(`colaborador/${colaborador.id}`)
+                                                    .delete(`horarioTrabalho/${horario.id}`)
                                                     .then(() => {
-                                                        const newColab = colaboradores.filter(col => col.id !== colaborador.id)
-                                                        setColaboradores(newColab)
+                                                        const newHorarios = horarios.filter(hor => hor.id !== horario.id)
+                                                        setHorarios(newHorarios)
                                                     })
                                                     .catch(() => swal("Falha ao excluir"))
                                             }}><FaTrash /></button>
 
-                                            <Link to={`colaborador/${colaborador.id}/editar`} 
+                                            <Link to={`horarioTrabalho/${horario.id}/editar`} 
                                                 className="btn btn-warning btn-sm ml-2"
                                             ><FaPencilAlt  /></Link>
                                         </td>
