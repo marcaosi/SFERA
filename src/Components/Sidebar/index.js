@@ -27,6 +27,16 @@ export default function Sidebar(){
                 <FaList className={styles.sidebarIcon} />
                 Cadastro de Setores
             </Link>
+
+            <Link to="/horarioTrabalho" className={styles.sidebarLink}>
+                <FaList className={styles.sidebarIcon} />
+                Cadastro de Horário de trabalho
+            </Link>
+
+            <Link to="/funcao" className={styles.sidebarLink}>
+                <FaList className={styles.sidebarIcon} />
+                Cadastro de Funções
+            </Link>
         </section>
     )
 }

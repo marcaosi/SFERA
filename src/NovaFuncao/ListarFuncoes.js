@@ -3,27 +3,25 @@ import axios from '../Service/Axios'
 import Title from '../Components/Title'
 import { Link } from 'react-router-dom'
 import swal from 'sweetalert'
-import { FaTrash } from 'react-icons/fa'
+import { FaTrash, FaPencilAlt } from 'react-icons/fa'
 
-export default function ListarColaboradores(){
-    const [agendas, setAgendas] = useState([])
+export default function ListarFuncoes(){
+    const [setores, setSetores] = useState([])
 
     useEffect(() => {
         axios
-            .get("agenda")
-            .then(({data}) => setAgendas(data.data))
+            .get("setor")
+            .then(({data}) => setSetores(data.data))
             .catch(err => console.log(err))
     }, [])
 
-    console.log(agendas)
-
     return(
         <>
-            <Title>Gerenciar agendas cadastradas</Title>
+            <Title>Gerenciar setores cadastradas</Title>
 
             <div className="row justify-content-md-center">
                 <div className="col-10 text-right">
-                    <Link to="agenda/novo" className="btn btn-primary mb-4">Nova agenda</Link>
+                    <Link to="setor/novo" className="btn btn-primary mb-4">Nova setor</Link>
                 </div>
             </div>
 
@@ -34,28 +32,30 @@ export default function ListarColaboradores(){
                             <tr>
                                 <th>#</th>
                                 <th>Nome</th>
-                                <th>Matrícula</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                agendas.map(agenda => (
-                                    <tr key={agenda.id}>
-                                        <td>{agenda.id}</td>
-                                        <td>{agenda.aluno.nome}</td>
-                                        <td>{agenda.sala.descricao + "/" + agenda.sala.ano}</td>
+                                setores.map(setor => (
+                                    <tr key={setor.id}>
+                                        <td>{setor.id}</td>
+                                        <td>{setor.nome}</td>
                                         <td>
                                             <button className="btn btn-danger btn-sm" onClick={
                                                 () => {
                                                     axios
-                                                    .delete(`agenda/${agenda.id}`)
+                                                    .delete(`setor/${setor.id}`)
                                                     .then(() => {
-                                                        const newAgenda = agendas.filter(ag => ag.id !== agenda.id)
-                                                        setAgendas(newAgenda)
+                                                        const newSetores = setores.filter(set => set.id !== setor.id)
+                                                        setSetores(newSetores)
                                                     })
                                                     .catch(() => swal("Falha ao excluir"))
                                             }}><FaTrash /></button>
+
+                                            <Link to={`setor/${setor.id}/editar`} 
+                                                className="btn btn-warning btn-sm ml-2"
+                                            ><FaPencilAlt  /></Link>
                                         </td>
                                     </tr>
                                 ))

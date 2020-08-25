@@ -25,6 +25,9 @@ import ListarAgendas from './NovaAgenda/ListarAgendas'
 import NovoHorarioTrabalho from './NovoHorarioTrabalho'
 import ListarHorarioTrabalho from './NovoHorarioTrabalho/ListarHorarioTrabalho'
 
+import NovaFuncao from './NovaFuncao'
+import ListarFuncoes from './NovaFuncao/ListarFuncoes'
+
 function App() {
   return (
     <BrowserRouter>
@@ -93,6 +96,16 @@ function App() {
                     </PrivateRoute>
                     <PrivateRoute path="/horarioTrabalho" exact>
                       <ListarHorarioTrabalho />
+                    </PrivateRoute>
+
+                    <PrivateRoute path="/funcao/novo" exact>
+                      <NovaFuncao />
+                    </PrivateRoute>
+                    <PrivateRoute path="/funcao/:id/editar" exact>
+                      <NovaFuncao />
+                    </PrivateRoute>
+                    <PrivateRoute path="/funcao" exact>
+                      <ListarFuncoes />
                     </PrivateRoute>
                 </Content>
               </div>
