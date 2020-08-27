@@ -27,6 +27,8 @@ import ListarHorarioTrabalho from './NovoHorarioTrabalho/ListarHorarioTrabalho'
 
 import NovaFuncao from './NovaFuncao'
 import ListarFuncoes from './NovaFuncao/ListarFuncoes'
+import NovaOcorrencia from './NovaOcorrencia'
+import ListarOcorrencias from './NovaOcorrencia/ListarOcorrencias'
 
 function App() {
   return (
@@ -106,6 +108,16 @@ function App() {
                     </PrivateRoute>
                     <PrivateRoute path="/funcao" exact>
                       <ListarFuncoes />
+                    </PrivateRoute>
+
+                    <PrivateRoute path="/ocorrencia/novo" exact>
+                      <NovaOcorrencia />
+                    </PrivateRoute>
+                    <PrivateRoute path="/ocorrencia/:id/editar" exact>
+                      <NovaOcorrencia />
+                    </PrivateRoute>
+                    <PrivateRoute path="/ocorrencia" exact>
+                      <ListarOcorrencias />
                     </PrivateRoute>
                 </Content>
               </div>

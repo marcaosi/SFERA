@@ -37,6 +37,11 @@ export default function Sidebar(){
                 <FaList className={styles.sidebarIcon} />
                 Cadastro de Funções
             </Link>
+
+            <Link to="/ocorrencia" className={styles.sidebarLink}>
+                <FaList className={styles.sidebarIcon} />
+                Cadastro de Ocorrências
+            </Link>
         </section>
     )
 }

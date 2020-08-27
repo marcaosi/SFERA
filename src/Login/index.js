@@ -18,7 +18,7 @@ export default function Login(){
     useEffect(() => {
         const jwt = localStorage.getItem("jwt")
         if(jwt) history.push("/")
-    }, [])
+    }, [history])
 
     const handleChangeText = (event) => {
         setDados({
