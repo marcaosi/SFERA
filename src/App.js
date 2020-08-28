@@ -27,10 +27,15 @@ import ListarHorarioTrabalho from './NovoHorarioTrabalho/ListarHorarioTrabalho'
 
 import NovaFuncao from './NovaFuncao'
 import ListarFuncoes from './NovaFuncao/ListarFuncoes'
+
 import NovaOcorrencia from './NovaOcorrencia'
 import ListarOcorrencias from './NovaOcorrencia/ListarOcorrencias'
+
 import NovoItemAgenda from './NovoItemAgenda'
 import ListarItensAgenda from './NovoItemAgenda/ListarItensAgenda'
+
+import NovaFrequencia from './NovaFrequencia'
+import ListarFrequencias from './NovaFrequencia/ListarFrequencias'
 
 function App() {
   return (
@@ -130,6 +135,16 @@ function App() {
                     </PrivateRoute>
                     <PrivateRoute path="/itemAgenda" exact>
                       <ListarItensAgenda />
+                    </PrivateRoute>
+
+                    <PrivateRoute path="/frequencia/novo" exact>
+                      <NovaFrequencia />
+                    </PrivateRoute>
+                    <PrivateRoute path="/frequencia/:id/editar" exact>
+                      <NovaFrequencia />
+                    </PrivateRoute>
+                    <PrivateRoute path="/frequencia" exact>
+                      <ListarFrequencias />
                     </PrivateRoute>
                 </Content>
               </div>

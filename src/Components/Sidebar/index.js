@@ -47,6 +47,11 @@ export default function Sidebar(){
                 <FaList className={styles.sidebarIcon} />
                 Cadastro de Item de Agenda
             </Link>
+
+            <Link to="/frequencia" className={styles.sidebarLink}>
+                <FaList className={styles.sidebarIcon} />
+                Cadastro de Frequência
+            </Link>
         </section>
     )
 }
