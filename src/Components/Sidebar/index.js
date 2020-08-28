@@ -42,6 +42,11 @@ export default function Sidebar(){
                 <FaList className={styles.sidebarIcon} />
                 Cadastro de Ocorrências
             </Link>
+
+            <Link to="/itemAgenda" className={styles.sidebarLink}>
+                <FaList className={styles.sidebarIcon} />
+                Cadastro de Item de Agenda
+            </Link>
         </section>
     )
 }

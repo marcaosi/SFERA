@@ -2,26 +2,24 @@ import React, { useState, useEffect } from 'react'
 import axios from '../Service/Axios'
 import Title from '../Components/Title'
 import { Link } from 'react-router-dom'
-import swal from 'sweetalert'
-import { FaTrash, FaPencilAlt } from 'react-icons/fa'
 
-export default function ListarOcorrencias(){
-    const [ocorrencias, setOcorrencias] = useState([])
+export default function ListarItensAgenda(){
+    const [itemAgendaLista, setItemAgendaList] = useState([])
 
     useEffect(() => {
         axios
-            .get("ocorrencia")
-            .then(({data}) => setOcorrencias(data.data))
+            .get("itemAgenda")
+            .then(({data}) => setItemAgendaList(data.data))
             .catch(err => console.log(err))
     }, [])
 
     return(
         <>
-            <Title>Gerenciar ocorrências cadastradas</Title>
+            <Title>Gerenciar cadastro de itens de agenda</Title>
 
             <div className="row justify-content-md-center">
                 <div className="col-10 text-right">
-                    <Link to="ocorrencia/novo" className="btn btn-primary mb-4">Nova Ocorrência</Link>
+                    <Link to="itemAgenda/novo" className="btn btn-primary mb-4">Novo</Link>
                 </div>
             </div>
 
@@ -38,12 +36,12 @@ export default function ListarOcorrencias(){
                         </thead>
                         <tbody>
                             {
-                                ocorrencias.map(ocorrencia => (
-                                    <tr key={ocorrencia.id}>
-                                        <td>{ocorrencia.id}</td>
-                                        <td>{ocorrencia.aluno.nome}</td>
-                                        <td>{ocorrencia.dataHora}</td>
-                                        <td>{ocorrencia.descricao}</td>
+                                itemAgendaLista.map(itemAgenda => (
+                                    <tr key={itemAgenda.id}>
+                                        <td>{itemAgenda.id}</td>
+                                        <td>{itemAgenda.nome}</td>
+                                        <td>{itemAgenda.dataHora}</td>
+                                        <td>{itemAgenda.tipo}</td>
                                     </tr>
                                 ))
                             }

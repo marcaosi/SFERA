@@ -29,6 +29,8 @@ import NovaFuncao from './NovaFuncao'
 import ListarFuncoes from './NovaFuncao/ListarFuncoes'
 import NovaOcorrencia from './NovaOcorrencia'
 import ListarOcorrencias from './NovaOcorrencia/ListarOcorrencias'
+import NovoItemAgenda from './NovoItemAgenda'
+import ListarItensAgenda from './NovoItemAgenda/ListarItensAgenda'
 
 function App() {
   return (
@@ -118,6 +120,16 @@ function App() {
                     </PrivateRoute>
                     <PrivateRoute path="/ocorrencia" exact>
                       <ListarOcorrencias />
+                    </PrivateRoute>
+
+                    <PrivateRoute path="/itemAgenda/novo" exact>
+                      <NovoItemAgenda />
+                    </PrivateRoute>
+                    <PrivateRoute path="/itemAgenda/:id/editar" exact>
+                      <NovoItemAgenda />
+                    </PrivateRoute>
+                    <PrivateRoute path="/itemAgenda" exact>
+                      <ListarItensAgenda />
                     </PrivateRoute>
                 </Content>
               </div>
